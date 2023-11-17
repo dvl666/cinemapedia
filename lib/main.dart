@@ -3,7 +3,6 @@ import 'package:cinemapedia/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod/riverpod.dart';
 
 
 Future main() async {
@@ -11,7 +10,7 @@ Future main() async {
   await dotenv.load(fileName: ".env");
 
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MyApp(),
     )
   );
