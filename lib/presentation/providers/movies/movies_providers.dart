@@ -8,18 +8,36 @@ final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movi
   return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
+final popularMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+  final fetchMoreMovies = ref.watch(movieReposirotyProvider).getPopular;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+});
+
+final topRatedMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+  final fetchMoreMovies = ref.watch(movieReposirotyProvider).getTopRated;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+});
+
 typedef MovieCallback = Future<List<Movie>> Function({int page});
 
 class MoviesNotifier extends StateNotifier<List<Movie>> {
 
   int currentPage = 0;
   MovieCallback fetchMoreMovies;
+  bool isLoading = false;
+
   MoviesNotifier({
     required this.fetchMoreMovies
   }):super([]);
   Future<void> loadNextPage() async {
+    if (isLoading) return;
+
+    isLoading = true; 
+    print('loading more movies');
     currentPage++;
     final List<Movie> movies = await fetchMoreMovies(page: currentPage);
     state = [...state, ...movies];
+    await Future.delayed(Duration(seconds: 1));
+    isLoading = false;
   }
 }
