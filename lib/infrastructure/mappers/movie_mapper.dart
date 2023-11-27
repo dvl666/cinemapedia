@@ -16,8 +16,10 @@ class MovieMapper {
     popularity: movieDB.popularity,
     posterPath:(movieDB.posterPath != '')
       ? 'https://image.tmdb.org/t/p/w500${movieDB.posterPath}'
-      : 'no-poster',
-    releaseDate: movieDB.releaseDate,
+      : 'https://www.movienewz.com/img/films/poster-holder.jpg',
+    releaseDate: (movieDB.releaseDate != null)
+      ? movieDB.releaseDate!
+      : DateTime.now(),
     title: movieDB.title,
     video: movieDB.video,
     voteAverage: movieDB.voteAverage,
@@ -28,7 +30,7 @@ class MovieMapper {
     adult: movie.adult, 
     backdropPath: (movie.backdropPath != '')
       ? 'https://image.tmdb.org/t/p/w500${movie.posterPath}'
-      : 'no-poster',
+      : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg',
     genreIds: movie.genres.map((e) => e.name).toList(), 
     id: movie.id, 
     originalLanguage: movie.originalLanguage, 
@@ -37,7 +39,7 @@ class MovieMapper {
     popularity: movie.popularity, 
     posterPath:(movie.posterPath != '')
       ? 'https://image.tmdb.org/t/p/w500${movie.posterPath}'
-      : 'no-poster', 
+      : 'https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg', 
     releaseDate: movie.releaseDate, 
     title: movie.title, 
     video: movie.video, 
