@@ -62,7 +62,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           (context, index) {
             return Column(
               children: [
-                const CustomAppbar(),
                 MoviesSlideShow(movies: slideShowMovies),
 
                 MoviesHorizontalListView(
